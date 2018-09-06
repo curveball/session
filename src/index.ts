@@ -72,7 +72,9 @@ export default function(options: SessionOptions): Middleware {
       await store.set(sessionId, ctx.state.session.data);
 
       const cookieOptions = {
-        path: '/'
+        path: '/',
+        sameSite: true,
+        httpOnly: true,
       };
       // Send new cookie
       ctx.response.headers.set('Set-Cookie',
