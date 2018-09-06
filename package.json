@@ -1,7 +1,7 @@
 {
-  "name": "@curveball/new-package",
-  "version": "0.0.1",
-  "description": "Description goes here",
+  "name": "@curveball/session",
+  "version": "0.1.0",
+  "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "make build",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curveballjs/new-package.git"
+    "url": "git+https://github.com/curveballjs/session.git"
   },
   "files": [
     "package.json",
@@ -23,21 +23,23 @@
     "framework",
     "nodejs",
     "typescript",
-    "push",
-    "http2",
-    "curveball"
+    "curveball",
+    "session",
+    "cookies",
+    "cookie"
   ],
   "author": "Evert Pot (https://evertpot.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curveballjs/new-package/issues"
+    "url": "https://github.com/curveballjs/session/issues"
   },
-  "homepage": "https://github.com/curveballjs/new-package#readme",
+  "homepage": "https://github.com/curveballjs/session#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.3",
     "@types/node": "^10.3.6",
     "@types/sinon": "^5.0.1",
+    "@types/cookie": "^0.3.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
@@ -53,5 +55,7 @@
     ]
   },
   "dependencies": {
-    "@curveball/core": "^0.6.0"
+    "@curveball/core": "^0.6.0",
+    "cookie": "^0.3.1"
+  }
 }
