@@ -1,22 +1,98 @@
-Curveball New Package
-=====================
+Curveball Session Middleware
+============================
 
-This repository serves as the skeleton for all new [Curveball][1] packages.
+This package adds support for sessions to the [Curveball][1] framework.
+
+Features:
+
+* It's lazy. It will only start a session if there is something in the store.
+* It will also automatically wipe the session data if session data was emptied.
 
 Installation
 ------------
 
-    npm install @curveball/new-package 
+    npm install @curveball/session
 
 
 Getting started
 ---------------
 
-...
+### Adding the middleware
+
+```typescript
+import session from '@curveball/session
+
+app.use(session({
+  store: 'memory',
+});
+
+```
+
+This will add the in-memory session store to curveball. This store is mostly
+meant for testing. It will leak memory.
+
+### Using the session store
+
+In your own controllers and middlewares, you can set and update session data
+via the `ctx.state.session.data` property.
+
+```typescript
+app.use( ctx => {
+
+  // Running this will create the session
+  ctx.state.session.data = { userId: 5 };
+  ctx.response.body = 'Hello world';
+
+});
+```
+
+### Deleting a session
+
+To delete an open session, just clear the session data:
+
+```typescript
+app.use( ctx => {
+
+  // Running this will create the session
+  ctx.state.session.data = null;
+
+});
+```
+
+### Re-generate a session id.
+
+If you clear the session id, but there is still data, the middleware will
+remove the old session and automatically create a new session id:
+
+```typescript
+app.use( ctx => {
+
+  // This will kill the old session and start a new one with the same data.
+  ctx.state.session.id = null;
+
+});
+```
+
 
 API
 ---
 
-...
+It's desirable to create your own stores for product usage. Eventually this
+project will probably add a few more default stores.
+
+Until then, you must implement the following interface:
+
+```typescript
+interface SessionStore {
+
+  set(id: string, values: SessionValues): Promise<void>;
+  get(id: string): Promise<SessionValues>,
+  delete(id: string): Promise<void>,
+  newSessionId(): Promise<string>,
+
+}
+```
+
+`SessionValues` is simply a key->value object.
 
 [1]: https://github.com/curveballjs/

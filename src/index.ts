@@ -1,15 +1,26 @@
-import { Middleware, Context } from '@curveball/core';
-import { SessionOptions, SessionValues } from './types';
+import { Context, Middleware } from '@curveball/core';
 import cookie from 'cookie';
+import MemoryStore from './memorystore';
+import { SessionOptions, SessionStore, SessionValues } from './types';
+
+export { default as MemoryStore } from './memorystore';
 
 export default function(options: SessionOptions): Middleware {
 
   const cookieName = options.cookieName ? options.cookieName : 'CBSESS';
 
+  let store: SessionStore;
+
+  if (options.store === 'memory') {
+    store = new MemoryStore();
+  } else {
+    store = options.store;
+  }
+
   return async (ctx, next) => {
 
     let sessionId = getSessionId(ctx, cookieName);
-    let sessionValues:SessionValues;
+    let sessionValues: SessionValues;
 
     ctx.state.session = {
       id: null,
@@ -17,7 +28,7 @@ export default function(options: SessionOptions): Middleware {
     };
 
     if (sessionId) {
-      sessionValues = await options.store.get(sessionId);
+      sessionValues = await store.get(sessionId);
 
       // Nothing was stored for sessions
       if (!sessionValues) {
@@ -38,7 +49,7 @@ export default function(options: SessionOptions): Middleware {
 
     if (sessionId && !ctx.state.session.id) {
       // The session id was removed from the context, wipe out old session.
-      options.store.delete(sessionId);
+      store.delete(sessionId);
     }
 
     const hasData = Object.keys(ctx.state.session.data).length > 0;
@@ -47,21 +58,26 @@ export default function(options: SessionOptions): Middleware {
 
       // There was a session, but there's no session data anymore. We remove
       // the session
-      options.store.delete(sessionId);
+      store.delete(sessionId);
 
-    } else {
+    } else if (hasData) {
 
       if (!ctx.state.session.id) {
 
         // Create a new session id.
-        sessionId = await options.store.newSessionId();
+        sessionId = await store.newSessionId();
 
       }
 
-      await options.store.set(sessionId, ctx.state.session.data);
+      await store.set(sessionId, ctx.state.session.data);
 
+      const cookieOptions = {
+        path: '/'
+      };
       // Send new cookie
-      ctx.response.headers.set('Set-Cookie', cookie.serialize(cookieName, sessionId));
+      ctx.response.headers.set('Set-Cookie',
+        cookie.serialize(cookieName, sessionId, cookieOptions)
+      );
 
     }
 

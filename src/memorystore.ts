@@ -1,8 +1,8 @@
-import { SessionStore, SessionValues } from './types';
-import { promisify } from 'util';
 import crypto from 'crypto';
+import { promisify } from 'util';
+import { SessionStore, SessionValues } from './types';
 
-export class MemoryStore implements SessionStore {
+export default class MemoryStore implements SessionStore {
 
   store: Map<string, SessionValues>;
 
@@ -15,10 +15,9 @@ export class MemoryStore implements SessionStore {
   async set(id: string, values: SessionValues): Promise<void> {
 
     this.store.set(id, values);
-
   }
- 
-  async get(id: string) : Promise<SessionValues> {
+
+  async get(id: string): Promise<SessionValues> {
 
     return this.store.get(id);
 
