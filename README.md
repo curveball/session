@@ -25,22 +25,38 @@ import session from '@curveball/session
 app.use(session({
   store: 'memory',
 });
-
 ```
 
 This will add the in-memory session store to curveball. This store is mostly
-meant for testing. It will leak memory.
+meant for testing.
+
+Here is another example with more options:
+
+```typescript
+import session from '@curveball/session
+
+app.use(session({
+  store: 'memory',
+  cookieName: 'MY_SESSION',
+  expiry: 7200
+});
+```
+
+* `cookieName` - Updates the name of the HTTP Cookie. It's `CBSESS` by default.
+* `expiry` - The number of seconds of inactivity before the session disappears.
+  this is 3600 seconds by default. It only pertains to the longevity of the
+  session in the store, it doesn't influence cookie parameters.
 
 ### Using the session store
 
 In your own controllers and middlewares, you can set and update session data
-via the `ctx.state.session.data` property.
+via the `ctx.state.session` property.
 
 ```typescript
 app.use( ctx => {
 
   // Running this will create the session
-  ctx.state.session.data = { userId: 5 };
+  ctx.state.session = { userId: 5 };
   ctx.response.body = 'Hello world';
 
 });
@@ -54,7 +70,7 @@ To delete an open session, just clear the session data:
 app.use( ctx => {
 
   // Running this will create the session
-  ctx.state.session.data = null;
+  ctx.state.session = null;
 
 });
 ```
@@ -68,11 +84,10 @@ remove the old session and automatically create a new session id:
 app.use( ctx => {
 
   // This will kill the old session and start a new one with the same data.
-  ctx.state.session.id = null;
+  ctx.state.sessionId = null;
 
 });
 ```
-
 
 API
 ---
@@ -85,7 +100,7 @@ Until then, you must implement the following interface:
 ```typescript
 interface SessionStore {
 
-  set(id: string, values: SessionValues): Promise<void>;
+  set(id: string, values: SessionValues, expire: number): Promise<void>;
   get(id: string): Promise<SessionValues>,
   delete(id: string): Promise<void>,
   newSessionId(): Promise<string>,
@@ -93,6 +108,7 @@ interface SessionStore {
 }
 ```
 
-`SessionValues` is simply a key->value object.
+`SessionValues` is simply a key->value object. `expire` is expressed as a unix
+timestamp.
 
 [1]: https://github.com/curveballjs/

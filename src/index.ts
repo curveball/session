@@ -5,6 +5,9 @@ import { SessionOptions, SessionStore, SessionValues } from './types';
 
 export { default as MemoryStore } from './memorystore';
 
+/**
+ * This function returns a middleware function.
+ */
 export default function(options: SessionOptions): Middleware {
 
   const cookieName = options.cookieName ? options.cookieName : 'CBSESS';
@@ -17,15 +20,18 @@ export default function(options: SessionOptions): Middleware {
     store = options.store;
   }
 
+  /**
+   * Expire after 1 hour by default.
+   */
+  const expiry = options.expiry !== undefined ? options.expiry : 3600;
+
   return async (ctx, next) => {
 
     let sessionId = getSessionId(ctx, cookieName);
     let sessionValues: SessionValues;
 
-    ctx.state.session = {
-      id: null,
-      data: {}
-    };
+    ctx.state.session = {};
+    ctx.state.sessionId = null;
 
     if (sessionId) {
       sessionValues = await store.get(sessionId);
@@ -35,10 +41,8 @@ export default function(options: SessionOptions): Middleware {
         // Wiping out sessionId, we need a new one for security reasons
         sessionId = null;
       } else {
-        ctx.state.session = {
-          data: sessionValues,
-          id: sessionId
-        };
+        ctx.state.session = sessionValues;
+        ctx.state.sessionId = sessionId;
       }
 
     }
@@ -47,12 +51,12 @@ export default function(options: SessionOptions): Middleware {
     await next();
 
 
-    if (sessionId && !ctx.state.session.id) {
+    if (sessionId && !ctx.state.sessionId) {
       // The session id was removed from the context, wipe out old session.
-      store.delete(sessionId);
+      await store.delete(sessionId);
     }
 
-    const hasData = Object.keys(ctx.state.session.data).length > 0;
+    const hasData = ctx.state.session && Object.keys(ctx.state.session).length > 0;
 
     if (sessionId && !hasData) {
 
@@ -62,14 +66,14 @@ export default function(options: SessionOptions): Middleware {
 
     } else if (hasData) {
 
-      if (!ctx.state.session.id) {
+      if (!ctx.state.sessionId) {
 
         // Create a new session id.
         sessionId = await store.newSessionId();
 
       }
 
-      await store.set(sessionId, ctx.state.session.data);
+      await store.set(sessionId, ctx.state.session, Math.floor(Date.now() / 1000) + expiry);
 
       const cookieOptions = {
         path: '/',
