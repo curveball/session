@@ -23,7 +23,7 @@ export default function(options: SessionOptions): Middleware {
   /**
    * Expire after 1 hour by default.
    */
-  const expiry = options.expiry ? options.expiry : 3600;
+  const expiry = options.expiry !== undefined ? options.expiry : 3600;
 
   return async (ctx, next) => {
 
@@ -42,7 +42,7 @@ export default function(options: SessionOptions): Middleware {
         sessionId = null;
       } else {
         ctx.state.session = sessionValues;
-        ctx.state.sessionId = null;
+        ctx.state.sessionId = sessionId;
       }
 
     }
@@ -53,10 +53,10 @@ export default function(options: SessionOptions): Middleware {
 
     if (sessionId && !ctx.state.sessionId) {
       // The session id was removed from the context, wipe out old session.
-      store.delete(sessionId);
+      await store.delete(sessionId);
     }
 
-    const hasData = Object.keys(ctx.state.session).length > 0;
+    const hasData = ctx.state.session && Object.keys(ctx.state.session).length > 0;
 
     if (sessionId && !hasData) {
 

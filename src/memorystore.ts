@@ -45,12 +45,15 @@ export default class MemoryStore implements SessionStore {
   async get(id: string): Promise<SessionValues | null> {
 
     const rightNow = Math.floor(Date.now() / 1000);
-    const [expire, values] = this.store.get(id);
-    if (expire < rightNow) {
+    const result = this.store.get(id);
+    if (!result) {
+      return null;
+    }
+    if (result[0] < rightNow) {
       this.delete(id);
       return null;
     }
-    return values;
+    return result[1];
 
   }
 
