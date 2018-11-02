@@ -33,8 +33,10 @@ export default function(options: SessionOptions): Middleware {
     ctx.state.session = {};
     ctx.state.sessionId = null;
 
+    console.log('sessionId', sessionId);
     if (sessionId) {
       sessionValues = await store.get(sessionId);
+      console.log('sessionValues', sessionValues);
 
       // Nothing was stored for sessions
       if (!sessionValues) {
@@ -62,7 +64,7 @@ export default function(options: SessionOptions): Middleware {
 
       // There was a session, but there's no session data anymore. We remove
       // the session
-      store.delete(sessionId);
+      await store.delete(sessionId);
 
     } else if (hasData) {
 
