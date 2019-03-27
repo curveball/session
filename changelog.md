@@ -1,4 +1,10 @@
-0.3.0 (2019-10-04)
+0.3.1 (2019-03-26)
+==================
+
+* Update to latest dependencies.
+
+
+0.3.0 (2018-10-04)
 ==================
 
 * Updated to latest Curveball API.
