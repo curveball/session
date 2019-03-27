@@ -28,7 +28,7 @@ export default function(options: SessionOptions): Middleware {
   return async (ctx, next) => {
 
     let sessionId = getSessionId(ctx, cookieName);
-    let sessionValues: SessionValues;
+    let sessionValues: SessionValues | null;
 
     ctx.state.session = {};
     ctx.state.sessionId = null;
@@ -73,7 +73,7 @@ export default function(options: SessionOptions): Middleware {
 
       }
 
-      await store.set(sessionId, ctx.state.session, Math.floor(Date.now() / 1000) + expiry);
+      await store.set(sessionId!, ctx.state.session, Math.floor(Date.now() / 1000) + expiry);
 
       const cookieOptions = {
         path: '/',
@@ -82,7 +82,7 @@ export default function(options: SessionOptions): Middleware {
       };
       // Send new cookie
       ctx.response.headers.set('Set-Cookie',
-        cookie.serialize(cookieName, sessionId, cookieOptions)
+        cookie.serialize(cookieName, sessionId!, cookieOptions)
       );
 
     }
