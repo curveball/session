@@ -20,7 +20,7 @@ Getting started
 ### Adding the middleware
 
 ```typescript
-import session from '@curveball/session
+import session from '@curveball/session';
 
 app.use(session({
   store: 'memory',
@@ -33,7 +33,7 @@ meant for testing.
 Here is another example with more options:
 
 ```typescript
-import session from '@curveball/session
+import session from '@curveball/session';
 
 app.use(session({
   store: 'memory',
