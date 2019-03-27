@@ -1,5 +1,5 @@
 import { Application, Response } from '@curveball/core';
-import session from '../';
+import session from '../src';
 import { expect } from 'chai';
 import MemoryStore from '../src/memorystore';
 
@@ -20,7 +20,7 @@ describe('Session middleware', () => {
     const app = getApp();
     const response1 = await app.subRequest('GET', '/first-request');
     const cookieHeader1 = response1.headers.get('Set-Cookie');
-    const cookieValue = cookieHeader1.split(';')[0];
+    const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
       Cookie: cookieValue 
@@ -39,7 +39,7 @@ describe('Session middleware', () => {
     });
     const response1 = await app.subRequest('GET', '/first-request');
     const cookieHeader1 = response1.headers.get('Set-Cookie');
-    const cookieValue = cookieHeader1.split(';')[0];
+    const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
       Cookie: cookieValue 
@@ -59,7 +59,7 @@ describe('Session middleware', () => {
     });
     const response1 = await app.subRequest('GET', '/first-request');
     const cookieHeader1 = response1.headers.get('Set-Cookie');
-    const cookieValue = cookieHeader1.split(';')[0];
+    const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
       Cookie: cookieValue 
@@ -83,8 +83,8 @@ describe('Session middleware', () => {
     const expire = Math.floor(Date.now()) / 1000;
 
     // Giving it a 5 second window
-    expect(store.store.get(sessionId)[0]).to.be.above(expire + 3600 - 5);
-    expect(store.store.get(sessionId)[0]).to.be.below(expire + 3600 + 5);
+    expect(store.store.get(sessionId)![0]).to.be.above(expire + 3600 - 5);
+    expect(store.store.get(sessionId)![0]).to.be.below(expire + 3600 + 5);
 
   });
 
@@ -101,8 +101,8 @@ describe('Session middleware', () => {
     const expire = Math.floor(Date.now() / 1000);
 
     // Giving it a 5 second window
-    expect(store.store.get(sessionId)[0]).to.be.above(expire + 1000 - 5);
-    expect(store.store.get(sessionId)[0]).to.be.below(expire + 1000 + 5);
+    expect(store.store.get(sessionId)![0]).to.be.above(expire + 1000 - 5);
+    expect(store.store.get(sessionId)![0]).to.be.below(expire + 1000 + 5);
 
   });
 
@@ -136,7 +136,7 @@ describe('Session middleware', () => {
     const response1 = await app.subRequest('GET', '/first-request');
     const cookieHeader1 = response1.headers.get('Set-Cookie');
 
-    let cookieValue = cookieHeader1.split(';')[0];
+    let cookieValue = cookieHeader1!.split(';')[0];
     cookieValue+='garbage';
 
     const response2 = await app.subRequest('GET', '/second-request', {
@@ -251,7 +251,7 @@ function getApp(options?: any) {
 function getSessionId(response: Response) {
 
   const header = response.headers.get('Set-Cookie');
-  const cookieParts = header.match(/^CBSESS=([A-Za-z0-9%]+);/)[1];
+  const cookieParts = header!.match(/^CBSESS=([A-Za-z0-9%]+);/)![1];
   return decodeURIComponent(cookieParts);
 
 }

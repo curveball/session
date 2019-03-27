@@ -17,7 +17,7 @@ export interface SessionStore {
    */
   set(id: string, values: SessionValues, expire: number): Promise<void>;
 
-  get(id: string): Promise<SessionValues>;
+  get(id: string): Promise<SessionValues | null>;
   delete(id: string): Promise<void>;
   newSessionId(): Promise<string>;
 

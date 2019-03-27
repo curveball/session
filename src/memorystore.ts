@@ -50,7 +50,7 @@ export default class MemoryStore implements SessionStore {
       return null;
     }
     if (result[0] < rightNow) {
-      this.delete(id);
+      await this.delete(id);
       return null;
     }
     return result[1];
