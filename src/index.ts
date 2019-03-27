@@ -33,10 +33,8 @@ export default function(options: SessionOptions): Middleware {
     ctx.state.session = {};
     ctx.state.sessionId = null;
 
-    console.log('sessionId', sessionId);
     if (sessionId) {
       sessionValues = await store.get(sessionId);
-      console.log('sessionValues', sessionValues);
 
       // Nothing was stored for sessions
       if (!sessionValues) {
