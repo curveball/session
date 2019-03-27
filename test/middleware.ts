@@ -1,5 +1,5 @@
 import { Application, Response } from '@curveball/core';
-import session from '../';
+import session from '../src';
 import { expect } from 'chai';
 import MemoryStore from '../src/memorystore';
 
