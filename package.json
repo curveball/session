@@ -38,11 +38,11 @@
     "@types/chai": "^4.1.7",
     "@types/cookie": "^0.3.2",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^11.12.0",
+    "@types/node": "^12.6.8",
     "@types/sinon": "^7.0.10",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
     "sinon": "^7.3.0",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
@@ -56,6 +56,6 @@
   },
   "dependencies": {
     "@curveball/core": "^0.8.1",
-    "cookie": "^0.3.1"
+    "cookie": "^0.4.0"
   }
 }

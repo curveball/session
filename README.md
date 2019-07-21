@@ -1,6 +1,8 @@
 Curveball Session Middleware
 ============================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/curveballjs/session.svg)](https://greenkeeper.io/)
+
 This package adds support for sessions to the [Curveball][1] framework.
 
 Features:
