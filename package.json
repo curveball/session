@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
@@ -35,18 +35,18 @@
   },
   "homepage": "https://github.com/curveballjs/session#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/cookie": "^0.3.2",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^12.6.8",
-    "@types/sinon": "^7.0.10",
+    "@types/chai": "^4.2.3",
+    "@types/cookie": "^0.3.3",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.5",
+    "@types/sinon": "^7.0.13",
     "chai": "^4.2.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1",
-    "sinon": "^7.3.0",
-    "ts-node": "^8.0.3",
-    "tslint": "^5.14.0",
-    "typescript": "^3.3.4000"
+    "sinon": "^7.4.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   },
   "types": "dist/",
   "nyc": {
@@ -55,7 +55,7 @@
     ]
   },
   "dependencies": {
-    "@curveball/core": "^0.9.0",
+    "@curveball/core": "^0.9.1",
     "cookie": "^0.4.0"
   }
 }
