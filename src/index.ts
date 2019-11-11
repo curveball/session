@@ -12,6 +12,12 @@ export default function(options: SessionOptions): Middleware {
 
   const cookieName = options.cookieName ? options.cookieName : 'CBSESS';
 
+  const cookieOptions = options.cookieOptions || {
+    path: '/',
+    sameSite: true,
+    httpOnly: true,
+  };
+
   let store: SessionStore;
 
   if (options.store === 'memory') {
@@ -75,11 +81,6 @@ export default function(options: SessionOptions): Middleware {
 
       await store.set(sessionId!, ctx.state.session, Math.floor(Date.now() / 1000) + expiry);
 
-      const cookieOptions = {
-        path: '/',
-        sameSite: true,
-        httpOnly: true,
-      };
       // Send new cookie
       ctx.response.headers.set('Set-Cookie',
         cookie.serialize(cookieName, sessionId!, cookieOptions)
