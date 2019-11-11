@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 * Allow cookieOptions to be overridden.
-
+* Curveball is now a peerDependenciy
 
 0.3.3 (2019-09-12)
 ------------------
