@@ -12,6 +12,7 @@ export type CookieOptions = {
   httpOnly?: boolean,
   path?: string,
   secure?: boolean,
+  sameSite: boolean | 'strict' | 'none' | 'lax',
 };
 
 export type SessionValues = {
