@@ -3,7 +3,15 @@ export type SessionOptions = {
   store: SessionStore | 'memory',
   cookieName?: string,
   expiry?: number
+  cookieOptions?: CookieOptions,
+};
 
+export type CookieOptions = {
+  domain?: string,
+  expires?: Date,
+  httpOnly?: boolean,
+  path?: string,
+  secure?: boolean,
 };
 
 export type SessionValues = {

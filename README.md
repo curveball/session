@@ -40,7 +40,12 @@ import session from '@curveball/session';
 app.use(session({
   store: 'memory',
   cookieName: 'MY_SESSION',
-  expiry: 7200
+  expiry: 7200,
+  cookieOptions: {
+    secure: true,
+    path: '/',
+    sameSite: true,
+  },
 });
 ```
 
@@ -48,6 +53,9 @@ app.use(session({
 * `expiry` - The number of seconds of inactivity before the session disappears.
   this is 3600 seconds by default. It only pertains to the longevity of the
   session in the store, it doesn't influence cookie parameters.
+* `cookieOptions` - If set, override cookie options from the default. The list
+  of supported options can be found in the documentation of the [cookie
+  package][3].
 
 ### Using the session store
 
@@ -114,3 +122,4 @@ interface SessionStore {
 timestamp.
 
 [1]: https://github.com/curveballjs/
+[2]: https://www.npmjs.com/package/cookie
