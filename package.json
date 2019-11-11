@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
