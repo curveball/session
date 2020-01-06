@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.2 (2020-01-05)
+------------------
+
+* Allow installation on Curveball 0.10.
+
+
 0.4.1 (2019-11-11)
 ------------------
 
@@ -11,17 +17,20 @@ Changelog
 ------------------
 
 * Allow cookieOptions to be overridden.
-* Curveball is now a peerDependenciy
+* Curveball is now a peerDependency
+
 
 0.3.3 (2019-09-12)
 ------------------
 
 * Update to Curveball 0.9 API
 
+
 0.3.2 (2019-03-26)
 ------------------
 
 * Stricter typescript errors.
+
 
 0.3.1 (2019-03-26)
 ------------------
@@ -29,7 +38,7 @@ Changelog
 * Update to latest dependencies.
 
 
-0.3.0 (2018-10-04)
+0.3.0 (2019-10-04)
 ------------------
 
 * Updated to latest Curveball API.
