@@ -29,6 +29,18 @@
     "cookie"
   ],
   "author": "Evert Pot (https://evertpot.com/)",
+  "contributors": [
+    {
+      "name": "Evert Pot",
+      "email": "evert@badgateway.net",
+      "url": "https://evertpot.com"
+    },
+    {
+      "name": "Ju-Hang Sin",
+      "email": "ju@badgateway.net",
+      "url": "https://juhangsin.net"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/curveball/session/issues"
@@ -44,10 +56,10 @@
     "chai": "^4.2.0",
     "mocha": "^7.0.0",
     "nyc": "^15.0.0",
-    "sinon": "^8.0.2",
-    "ts-node": "^8.5.4",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.4"
+    "sinon": "^8.1.1",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
   },
   "types": "dist/",
   "nyc": {

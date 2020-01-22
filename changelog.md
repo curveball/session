@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.5.0 (2020-01-22)
+------------------
+
+* Changed the default setting for `SameSite` to `Lax`.
+
+
 0.4.2 (2020-01-05)
 ------------------
 
