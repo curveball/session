@@ -3,3 +3,4 @@ node_js:
   - stable
   - 9
   - 10
+  - 12
