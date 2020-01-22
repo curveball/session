@@ -11,7 +11,7 @@ describe('Session middleware', () => {
     const app = getApp();
     const response = await app.subRequest('GET', '/first-request');
     const header = response.headers.get('Set-Cookie');
-    expect(header).to.match(/^CBSESS=([0-9A-Za-z%]+); Path=\/; HttpOnly; SameSite=Strict/);
+    expect(header).to.match(/^CBSESS=([0-9A-Za-z%]+); Path=\/; HttpOnly; SameSite=Lax/);
 
   });
 
