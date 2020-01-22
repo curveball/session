@@ -14,7 +14,7 @@ export default function(options: SessionOptions): Middleware {
 
   const cookieOptions = options.cookieOptions || {
     path: '/',
-    sameSite: true,
+    sameSite: 'lax',
     httpOnly: true,
   };
 
