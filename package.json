@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curveballjs/session.git"
+    "url": "git+https://github.com/curveball/session.git"
   },
   "files": [
     "package.json",
@@ -31,9 +31,9 @@
   "author": "Evert Pot (https://evertpot.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curveballjs/session/issues"
+    "url": "https://github.com/curveball/session/issues"
   },
-  "homepage": "https://github.com/curveballjs/session#readme",
+  "homepage": "https://github.com/curveball/session#readme",
   "devDependencies": {
     "@curveball/core": "^0.10.0",
     "@types/chai": "^4.2.7",
