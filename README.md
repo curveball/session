@@ -1,8 +1,6 @@
 Curveball Session Middleware
 ============================
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/curveballjs/session.svg)](https://greenkeeper.io/)
-
 This package adds support for sessions to the [Curveball][1] framework.
 
 Features:
@@ -121,5 +119,5 @@ interface SessionStore {
 `SessionValues` is simply a key->value object. `expire` is expressed as a unix
 timestamp.
 
-[1]: https://github.com/curveballjs/
+[1]: https://github.com/curveball/
 [2]: https://www.npmjs.com/package/cookie
