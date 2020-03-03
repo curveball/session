@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.5.1 (?)
+---------
+
+* Typescript target is now `es2019` instead of `esnext` to ensure that older
+  Node.js versions are supported.
+
+
 0.5.0 (2020-01-22)
 ------------------
 
