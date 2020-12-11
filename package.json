@@ -82,6 +82,7 @@
       "ts",
       "js",
       "tsx"
-    ]
+    ],
+    "exit": true
   }
 }
