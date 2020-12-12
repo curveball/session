@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import { randomBytes as rb } from 'crypto';
 import { promisify } from 'util';
 import { SessionStore, SessionValues } from './types';
 
@@ -6,6 +6,8 @@ type SessionData = [
   number,
   SessionValues
 ];
+
+const randomBytes = promisify(rb);
 
 /**
  * The in-memory session store keeps every session into memory.
@@ -65,9 +67,7 @@ export default class MemoryStore implements SessionStore {
 
   async newSessionId(): Promise<string> {
 
-    const randomBytes = promisify(crypto.randomBytes);
     const bytes = await randomBytes(32);
-
     return bytes.toString('base64');
 
   }

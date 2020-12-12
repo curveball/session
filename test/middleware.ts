@@ -23,7 +23,7 @@ describe('Session middleware', () => {
     const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
-      Cookie: cookieValue 
+      Cookie: cookieValue
     });
 
     expect(response2.body).to.equal('bar');
@@ -42,7 +42,7 @@ describe('Session middleware', () => {
     const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
-      Cookie: cookieValue 
+      Cookie: cookieValue
     });
 
     expect(response2.body).to.equal('bar');
@@ -62,7 +62,7 @@ describe('Session middleware', () => {
     const cookieValue = cookieHeader1!.split(';')[0];
 
     const response2 = await app.subRequest('GET', '/second-request', {
-      Cookie: cookieValue 
+      Cookie: cookieValue
     });
 
     expect(response2.body).to.equal('bar');
@@ -116,7 +116,7 @@ describe('Session middleware', () => {
     const response1 = await app.subRequest('GET', '/first-request');
     const sessionId = getSessionId(response1);
 
-    await (new Promise((res, rej) => {
+    await (new Promise(res => {
       setTimeout(res, 1000);
     }));
 
@@ -140,7 +140,7 @@ describe('Session middleware', () => {
     cookieValue+='garbage';
 
     const response2 = await app.subRequest('GET', '/second-request', {
-      Cookie: cookieValue 
+      Cookie: cookieValue
     });
 
     expect(response2.body).to.equal(undefined);
@@ -165,12 +165,12 @@ describe('Session middleware', () => {
     expect(response2.body).to.equal(undefined);
 
   });
-  
+
   it('should wipe out old sessions if the id was removed', async() => {
 
     const store = new MemoryStore();
     const app = getApp({
-      store 
+      store
     });
     const response1 = await app.subRequest('GET', '/first-request');
     const sessionId1 = getSessionId(response1);
@@ -194,7 +194,7 @@ describe('Session middleware', () => {
 
     const store = new MemoryStore();
     const app = getApp({
-      store 
+      store
     });
     const response1 = await app.subRequest('GET', '/first-request');
     const sessionId1 = getSessionId(response1);
@@ -206,7 +206,7 @@ describe('Session middleware', () => {
     });
 
     expect(response2.body).to.equal(null);
-    
+
     expect(response2.headers.get('Set-Cookie')).to.equal(null);
     expect(await store.get(sessionId1)).to.equal(null);
 

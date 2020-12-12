@@ -58,14 +58,14 @@ describe('MemoryStore', () => {
     const ms = new MemoryStore();
     await ms.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000)-1);
 
-    // GC schedule 
+    // GC schedule
     ms.scheduleGc(1);
 
     // Before
     expect(ms.store.get('foo')).to.not.equal(null);
 
     // Wait 2 seconds
-    await (new Promise((res, rej) => {
+    await (new Promise(res => {
       setTimeout(res, 2000);
     }));
 
