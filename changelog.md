@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.6.1 (2021-02-02)
+------------------
+
+* Session data should be typed as `Record<string, any>` not
+  `Record<string, string>`.
+
+
 0.6.0 (2021-02-02)
 ------------------
 
