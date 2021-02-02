@@ -47,7 +47,9 @@
   },
   "homepage": "https://github.com/curveball/session#readme",
   "devDependencies": {
+    "@curveball/bodyparser": "^0.4.6",
     "@curveball/core": "^0.15.0",
+    "@curveball/problem": "^0.2.2",
     "@types/chai": "^4.2.14",
     "@types/cookie": "^0.4.0",
     "@types/mocha": "^8.2.0",

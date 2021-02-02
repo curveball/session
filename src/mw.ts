@@ -43,22 +43,22 @@ export default function(options: SessionOptions): Middleware {
         return ctx.session['csrf-token'];
       }
       const bytes = await randomBytes(32);
-      const token = bytes.toString('base64url');
+      const token = bytes.toString('base64');
       ctx.session['csrf-token'] = token;
       return token;
     };
-    ctx.validateCsrf = async(token?: string) => {
+    ctx.validateCsrf = (token?: string) => {
       if (!token) {
-        token = ctx.request.body['csrf-token'];
-        if (!token) {
-          throw new CsrfError('No CSRF token was found in the request body');
-        }
-        if (!ctx.session['csrf-token']) {
-          throw new CsrfError('No CSRF token exists in the session');
-        }
-        if (ctx.session['csrf-token'] !== token) {
-          throw new CsrfError('CSRF token is incorrect');
-        }
+        token = ctx.request?.body?.['csrf-token'];
+      }
+      if (!token) {
+        throw new CsrfError('No CSRF token was found in the request body');
+      }
+      if (!ctx.session['csrf-token']) {
+        throw new CsrfError('No CSRF token exists in the session');
+      }
+      if (ctx.session['csrf-token'] !== token) {
+        throw new CsrfError('CSRF token is incorrect');
       }
     };
 

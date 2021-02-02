@@ -5,13 +5,12 @@ import MemoryStore from '../src/memorystore';
 
 describe('Session middleware', () => {
 
-
   it('should set the correct Set-Cookie header', async() => {
 
     const app = getApp();
     const response = await app.subRequest('GET', '/first-request');
     const header = response.headers.get('Set-Cookie');
-    expect(header).to.match(/^CBSESS=([0-9A-Za-z%]+); Path=\/; HttpOnly; SameSite=Lax/);
+    expect(header).to.match(/^CB=([0-9A-Za-z%]+); Path=\/; HttpOnly; SameSite=Lax/);
 
   });
 
@@ -121,7 +120,7 @@ describe('Session middleware', () => {
     }));
 
     const response2 = await app.subRequest('GET', '/second-request', {
-      Cookie: 'CBSESS=' + sessionId
+      Cookie: 'CB=' + sessionId
     });
 
     expect(response2.body).to.equal(undefined);
@@ -178,7 +177,7 @@ describe('Session middleware', () => {
     expect(await store.get(sessionId1)).to.not.equal(null);
 
     const response2 = await app.subRequest('GET', '/remove-session-id', {
-      Cookie: 'CBSESS=' + sessionId1
+      Cookie: 'CB=' + sessionId1
     });
 
     expect(response2.body).to.equal(null);
@@ -202,7 +201,7 @@ describe('Session middleware', () => {
     expect(await store.get(sessionId1)).to.not.equal(null);
 
     const response2 = await app.subRequest('GET', '/remove-session-data', {
-      Cookie: 'CBSESS=' + sessionId1
+      Cookie: 'CB=' + sessionId1
     });
 
     expect(response2.body).to.equal(null);
@@ -228,17 +227,17 @@ function getApp(options?: any) {
   app.use( ctx => {
 
     if (ctx.path === '/first-request') {
-      ctx.state.session.foo = 'bar';
+      ctx.session.foo = 'bar';
     }
 
     if (ctx.path === '/second-request') {
-      ctx.response.body = ctx.state.session.foo;
+      ctx.response.body = ctx.session.foo;
     }
     if (ctx.path === '/remove-session-id') {
-      ctx.state.sessionId = null;
+      ctx.sessionId = null;
     }
     if (ctx.path === '/remove-session-data') {
-      ctx.state.session = null;
+      ctx.session = {};
     }
     ctx.status = 200;
 
@@ -251,7 +250,7 @@ function getApp(options?: any) {
 function getSessionId(response: Response) {
 
   const header = response.headers.get('Set-Cookie');
-  const cookieParts = header!.match(/^CBSESS=([A-Za-z0-9%]+);/)![1];
+  const cookieParts = header!.match(/^CB=([A-Za-z0-9%]+);/)![1];
   return decodeURIComponent(cookieParts);
 
 }
