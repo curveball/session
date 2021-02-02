@@ -14,6 +14,16 @@ Installation
 
     npm install @curveball/session
 
+Upgrading from versions 0.5 and below
+-------------------------------------
+
+If you are upgrading from a 0.5.x release or earlier, this package introduces
+a BC break since 0.6.
+
+In 0.5 session data was available in `ctx.state.session` and
+`ctx.state.sessionId`, but this has been moved to `ctx.session` and
+`ctx.sessionId`.
+
 
 Getting started
 ---------------
