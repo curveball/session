@@ -7,6 +7,7 @@ Features:
 
 * It's lazy. It will only start a session if there is something in the store.
 * It will also automatically wipe the session data if session data was emptied.
+* It provides features for generating and validating CSRF tokens.
 
 Installation
 ------------
@@ -47,7 +48,7 @@ app.use(session({
 });
 ```
 
-* `cookieName` - Updates the name of the HTTP Cookie. It's `CBSESS` by default.
+* `cookieName` - Updates the name of the HTTP Cookie. It's `CB` by default.
 * `expiry` - The number of seconds of inactivity before the session disappears.
   this is 3600 seconds by default. It only pertains to the longevity of the
   session in the store, it doesn't influence cookie parameters.
@@ -58,13 +59,13 @@ app.use(session({
 ### Using the session store
 
 In your own controllers and middlewares, you can set and update session data
-via the `ctx.state.session` property.
+via the `ctx.session` property.
 
 ```typescript
 app.use( ctx => {
 
   // Running this will create the session
-  ctx.state.session = { userId: 5 };
+  ctx.session = { userId: 5 };
   ctx.response.body = 'Hello world';
 
 });
@@ -78,7 +79,7 @@ To delete an open session, just clear the session data:
 app.use( ctx => {
 
   // Running this will create the session
-  ctx.state.session = null;
+  ctx.session = null;
 
 });
 ```
@@ -92,10 +93,43 @@ remove the old session and automatically create a new session id:
 app.use( ctx => {
 
   // This will kill the old session and start a new one with the same data.
-  ctx.state.sessionId = null;
+  ctx.sessionId = null;
 
 });
 ```
+
+### CSRF token support
+
+To obtain a CSRF token for forms, the middleware provides a `getCsrf()` function:
+
+```typescript
+app.use( async ctx => {
+
+  // Obtain a CSRF token for HTML forms:
+  const csrfToken = await ctx.getCsrf();
+
+});
+```
+
+It's recommended to embed this token in HTML forms as such:
+
+```html
+<input type="hidden" name="csrf-token" value="....token goes here" />
+```
+
+Then on `POST` requests, you can easily validate the token with the `validateCsrf`
+function. If the token was incorrect, this will automatically result in a 403
+error:
+
+```typescript
+app.use(route.post('/form-submit', ctx => {
+
+  // Throws error if csrf-token was not supplied or incorrect
+  ctx.validateCsrf();
+
+}));
+```
+
 
 API
 ---
