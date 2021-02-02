@@ -9,7 +9,7 @@ declare module '@curveball/core' {
      *
      * Anything put in this object will be stored in the session storage.
      */
-    session: Record<string, string>;
+    session: Record<string, any>;
 
     /**
      * The sessionId.
@@ -44,7 +44,7 @@ declare module '@curveball/core' {
      *
      * Anything put in this object will be stored in the session storage.
      */
-    session: Record<string, string>;
+    session: Record<string, any>;
 
     /**
      * The sessionId.
