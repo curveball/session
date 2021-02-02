@@ -5,10 +5,10 @@ export class CsrfError extends Error {
   detail: string;
   httpStatus = 403;
   instance = null;
-  
+
   constructor(message: string) {
     super();
     this.detail = message;
-  }   
+  }
 
 }

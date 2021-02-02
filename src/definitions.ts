@@ -3,7 +3,7 @@ import '@curveball/core';
 declare module '@curveball/core' {
 
   interface BaseContext {
-    
+
     /**
      * An object with session data.
      *
@@ -33,7 +33,7 @@ declare module '@curveball/core' {
      * ctx.request.body['csrf-token'] instead.
      *
      * If no token is found, or the token is incorrect, this will emit a
-     * an exception. 
+     * an exception.
      */
     validateCsrf(token?: string): void;
   }
@@ -68,7 +68,7 @@ declare module '@curveball/core' {
      * ctx.request.body['csrf-token'] instead/
      *
      * If no token is found, or the token is incorrect, this will emit a
-     * an exception. 
+     * an exception.
      */
     validateCsrf(token?: string): void;
   }
