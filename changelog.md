@@ -1,11 +1,16 @@
 Changelog
 =========
 
-0.5.1 (?)
----------
+0.6.0 (2021-02-02)
+------------------
 
+* Major BC break: session information is now stored in `ctx.session` instead of
+  `ctx.state.session`.
+* Adding features for CSRF token generation and checking: `ctx.getCsrf` and
+  `ctx.validateCsrf`.
 * Typescript target is now `es2019` instead of `esnext` to ensure that older
   Node.js versions are supported.
+* Switched to eslint.
 
 
 0.5.0 (2020-01-22)
