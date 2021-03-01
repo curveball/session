@@ -10,7 +10,7 @@ describe('CSRF tokens', () => {
 
     const app = getApp();
 
-    const response = await app.subRequest('GET', '/get-csrf');
+    const response:any = await app.subRequest('GET', '/get-csrf');
     expect(response.body.csrf).to.not.equal(null);
 
   });
@@ -18,7 +18,7 @@ describe('CSRF tokens', () => {
 
     const app = getApp();
 
-    const response = await app.subRequest('GET', '/get-csrf-twice');
+    const response:any = await app.subRequest('GET', '/get-csrf-twice');
     expect(response.body.csrf1).to.equal(response.body.csrf2);
 
   });
@@ -26,10 +26,10 @@ describe('CSRF tokens', () => {
 
     const app = getApp();
 
-    const response1 = await app.subRequest('GET', '/get-csrf');
-    const token1 = response1.body.csrf;
+    const response1:any = await app.subRequest('GET', '/get-csrf');
+    const token1:any = response1.body.csrf;
 
-    const response2 = await app.subRequest('GET', '/get-csrf', { 'Cookie': `CB=${getSessionId(response1)}`});
+    const response2:any = await app.subRequest('GET', '/get-csrf', { 'Cookie': `CB=${getSessionId(response1)}`});
     const token2 = response2.body.csrf;
 
     expect(token1).to.equal(token2);
@@ -85,7 +85,7 @@ describe('CSRF tokens', () => {
         'Cookie': `CB=${getSessionId(response1)}`,
         'Content-Type': 'application/json',
       },
-      JSON.stringify({ 'csrf-token': response1.body.csrf }),
+      JSON.stringify({ 'csrf-token': (response1.body as any).csrf }),
     );
     expect(response2.status).to.equal(200);
 
