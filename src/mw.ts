@@ -49,7 +49,7 @@ export default function(options: SessionOptions): Middleware {
     };
     ctx.validateCsrf = (token?: string) => {
       if (!token) {
-        token = ctx.request?.body?.['csrf-token'];
+        token = (ctx.request as any).body?.['csrf-token'];
       }
       if (!token) {
         throw new CsrfError('No CSRF token was found in the request body');
