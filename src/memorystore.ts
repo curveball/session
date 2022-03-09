@@ -31,6 +31,9 @@ export default class MemoryStore implements SessionStore {
    */
   store: Map<string, SessionData>;
 
+  /** Stores the timeout ID for the garbage collector */
+  timeoutId: NodeJS.Timeout | null = null;
+
   constructor() {
 
     this.store = new Map();
@@ -96,11 +99,20 @@ export default class MemoryStore implements SessionStore {
    */
   scheduleGc(interval = 600) {
 
-    setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       this.gc();
       this.scheduleGc(interval);
     }, interval * 1000);
 
+  }
+
+  /**
+   * Cancels the garbage collection scheduler
+   */
+  close() {
+    if (this.timeoutId !== null) {
+      clearTimeout(this.timeoutId);
+    }
   }
 
 }
