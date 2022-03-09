@@ -1,22 +1,22 @@
 export type SessionOptions = {
 
-  store: SessionStore | 'memory',
-  cookieName?: string,
-  expiry?: number
-  cookieOptions?: CookieOptions,
+  store: SessionStore | 'memory';
+  cookieName?: string;
+  expiry?: number;
+  cookieOptions?: CookieOptions;
 };
 
 export type CookieOptions = {
-  domain?: string,
-  expires?: Date,
-  httpOnly?: boolean,
-  path?: string,
-  secure?: boolean,
-  sameSite: boolean | 'strict' | 'none' | 'lax',
+  domain?: string;
+  expires?: Date;
+  httpOnly?: boolean;
+  path?: string;
+  secure?: boolean;
+  sameSite: boolean | 'strict' | 'none' | 'lax';
 };
 
 export type SessionValues = {
-  [s: string]: any
+  [s: string]: any;
 };
 
 export interface SessionStore {
