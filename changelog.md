@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.6.3 (2022-03-09)
+------------------
+
+* Added 'close' method to Memory session store, so users may cleanup open
+  timeouts. (@defrex)
+* Updated everything to latest curveball standards.
+
+
 0.6.2 (2021-03-01)
 ------------------
 
