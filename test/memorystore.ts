@@ -74,4 +74,39 @@ describe('MemoryStore', () => {
 
   });
 
+  it('should close the GC scheduler', async function() {
+
+    this.timeout(5000);
+
+    const ms = new MemoryStore();
+
+    // GC schedule
+    ms.scheduleGc(1);
+
+    // Before
+    expect(ms.store.get('foo')).to.not.equal(null);
+
+    // Wait 2 seconds
+    await (new Promise(res => {
+      setTimeout(res, 2000);
+    }));
+
+    // After GC run
+    expect(ms.store.get('foo')).to.equal(undefined);
+
+    ms.close();
+
+    // Before
+    expect(ms.store.get('bar')).to.not.equal(null);
+
+    // Wait 2 seconds
+    await (new Promise(res => {
+      setTimeout(res, 2000);
+    }));
+
+    // After GC run
+    expect(ms.store.get('bar')).to.not.equal(null);
+
+  });
+
 });
