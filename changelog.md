@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.7.0 (2022-03-21)
+------------------
+
+* Removed `expires` option, and added `maxAge` instead. `expires` never made
+  sense, because it represents a fixed point in time. Which means that if
+  `expires` was set to 1 hour in the future, the middleware would no longer
+  generate valid sessions after the first hour the server is up. (@defrex)
+
 0.6.3 (2022-03-09)
 ------------------
 
