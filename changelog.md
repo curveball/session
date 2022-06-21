@@ -8,6 +8,8 @@ Changelog
   sense, because it represents a fixed point in time. Which means that if
   `expires` was set to 1 hour in the future, the middleware would no longer
   generate valid sessions after the first hour the server is up. (@defrex)
+* Dropped Node 12 support. Node 14 is now the minimum version.
+
 
 0.6.3 (2022-03-09)
 ------------------
