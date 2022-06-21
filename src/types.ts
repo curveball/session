@@ -8,8 +8,8 @@ export type SessionOptions = {
 
 export type CookieOptions = {
   domain?: string;
-  expires?: Date;
   httpOnly?: boolean;
+  maxAge?: number;
   path?: string;
   secure?: boolean;
   sameSite: boolean | 'strict' | 'none' | 'lax';
