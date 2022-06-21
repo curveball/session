@@ -5,10 +5,8 @@ export type SessionOptions = {
   store: SessionStore | 'memory';
   cookieName?: string;
   expiry?: number;
-  cookieOptions?: CookieOptions;
+  cookieOptions?: CookieSerializeOptions;
 };
-
-export type CookieOptions = CookieSerializeOptions;
 
 export type SessionValues = {
   [s: string]: any;
