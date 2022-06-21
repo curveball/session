@@ -1,11 +1,12 @@
 {
   "name": "@curveball/session",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "make build",
     "test": "make lint test",
+    "lint": "make lint",
     "tsc": "tsc"
   },
   "repository": {
@@ -48,10 +49,10 @@
   "homepage": "https://github.com/curveball/session#readme",
   "devDependencies": {
     "@curveball/bodyparser": "^0.4.14",
-    "@curveball/core": "^0.17.0",
+    "@curveball/core": "^0.19.0",
     "@curveball/problem": "^0.3.0",
     "@types/chai": "^4.2.15",
-    "@types/cookie": "^0.4.0",
+    "@types/cookie": "^0.5.1",
     "@types/mocha": "^9.1.0",
     "@types/node": "^12.20.4",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
@@ -70,7 +71,7 @@
     ]
   },
   "dependencies": {
-    "cookie": "^0.4.1"
+    "cookie": "^0.5.0"
   },
   "peerDependencies": {
     "@curveball/core": ">=0.15 <1"
