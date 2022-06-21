@@ -1,3 +1,5 @@
+import { CookieSerializeOptions } from 'cookie';
+
 export type SessionOptions = {
 
   store: SessionStore | 'memory';
@@ -6,14 +8,7 @@ export type SessionOptions = {
   cookieOptions?: CookieOptions;
 };
 
-export type CookieOptions = {
-  domain?: string;
-  expires?: Date;
-  httpOnly?: boolean;
-  path?: string;
-  secure?: boolean;
-  sameSite: boolean | 'strict' | 'none' | 'lax';
-};
+export type CookieOptions = CookieSerializeOptions;
 
 export type SessionValues = {
   [s: string]: any;
