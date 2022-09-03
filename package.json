@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
@@ -48,20 +48,21 @@
   },
   "homepage": "https://github.com/curveball/session#readme",
   "devDependencies": {
-    "@curveball/bodyparser": "^0.4.14",
-    "@curveball/core": "^0.19.0",
+    "@curveball/bodyparser": "^0.5.0",
+    "@curveball/kernel": "^0.20.0",
     "@curveball/problem": "^0.3.0",
     "@types/chai": "^4.2.15",
     "@types/cookie": "^0.5.1",
-    "@types/mocha": "^9.1.0",
-    "@types/node": "^12.20.4",
-    "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^14.18.26",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
     "chai": "^4.3.0",
-    "eslint": "^8.10.0",
-    "mocha": "^9.2.1",
+    "eslint": "^8.23.0",
+    "mocha": "^10.0.0",
     "nyc": "^15.1.0",
-    "ts-node": "^10.7.0",
+    "sinon": "^14.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.2.2"
   },
   "types": "dist/",
@@ -73,9 +74,6 @@
   "dependencies": {
     "cookie": "^0.5.0"
   },
-  "peerDependencies": {
-    "@curveball/core": ">=0.15 <1"
-  },
   "mocha": {
     "require": "ts-node/register",
     "recursive": true,
@@ -85,5 +83,8 @@
       "tsx"
     ],
     "exit": true
+  },
+  "peerDependencies": {
+    "@curveball/kernel": ">=0.20.0 <1"
   }
 }

@@ -1,4 +1,4 @@
-import { Context, Middleware } from '@curveball/core';
+import { Context, Middleware } from '@curveball/kernel';
 import * as cookie from 'cookie';
 import MemoryStore from './memorystore';
 import { SessionOptions, SessionStore, SessionValues } from './types';

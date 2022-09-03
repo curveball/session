@@ -1,4 +1,4 @@
-import { Application, Response } from '@curveball/core';
+import { Application, Response } from '@curveball/kernel';
 import session from '../src';
 import { expect } from 'chai';
 import MemoryStore from '../src/memorystore';
