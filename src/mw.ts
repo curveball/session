@@ -81,7 +81,7 @@ export default function(options: SessionOptions): Middleware {
       // Run all middlewares
       await next();
 
-    } finally { 
+    } finally {
 
       if (sessionId && !ctx.sessionId) {
         // The session id was removed from the context, wipe out old session.
