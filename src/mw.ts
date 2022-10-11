@@ -76,37 +76,43 @@ export default function(options: SessionOptions): Middleware {
 
     }
 
-    // Run all middlewares
-    await next();
+    try {
 
-    if (sessionId && !ctx.sessionId) {
-      // The session id was removed from the context, wipe out old session.
-      await store.delete(sessionId);
-    }
+      // Run all middlewares
+      await next();
 
-    const hasData = ctx.session && Object.keys(ctx.session).length > 0;
+    } finally {
 
-    if (sessionId && !hasData) {
-
-      // There was a session, but there's no session data anymore. We remove
-      // the session
-      await store.delete(sessionId);
-
-    } else if (hasData) {
-
-      if (!ctx.sessionId) {
-
-        // Create a new session id.
-        sessionId = await store.newSessionId();
-
+      if (sessionId && !ctx.sessionId) {
+        // The session id was removed from the context, wipe out old session.
+        await store.delete(sessionId);
       }
 
-      await store.set(sessionId!, ctx.session, Math.floor(Date.now() / 1000) + expiry);
+      const hasData = ctx.session && Object.keys(ctx.session).length > 0;
 
-      // Send new cookie
-      ctx.response.headers.set('Set-Cookie',
-        cookie.serialize(cookieName, sessionId!, cookieOptions)
-      );
+      if (sessionId && !hasData) {
+
+        // There was a session, but there's no session data anymore. We remove
+        // the session
+        await store.delete(sessionId);
+
+      } else if (hasData) {
+
+        if (!ctx.sessionId) {
+
+          // Create a new session id.
+          sessionId = await store.newSessionId();
+
+        }
+
+        await store.set(sessionId!, ctx.session, Math.floor(Date.now() / 1000) + expiry);
+
+        // Send new cookie
+        ctx.response.headers.set('Set-Cookie',
+          cookie.serialize(cookieName, sessionId!, cookieOptions)
+        );
+
+      }
 
     }
 

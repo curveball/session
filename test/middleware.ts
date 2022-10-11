@@ -210,6 +210,23 @@ describe('Session middleware', () => {
     expect(await store.get(sessionId1)).to.equal(null);
 
   });
+
+  it('should still store session data if later middlewares throw an error', async () => {
+
+    const app = getApp();
+    const response1 = await app.subRequest('GET', '/first-request-error');
+    const cookieHeader1 = response1.headers.get('Set-Cookie');
+    const cookieValue = cookieHeader1!.split(';')[0];
+
+    const response2 = await app.subRequest('GET', '/second-request', {
+      Cookie: cookieValue
+    });
+
+    expect(response2.body).to.equal('bar');
+    const cookieHeader2 = response2.headers.get('Set-Cookie');
+    expect(cookieHeader2).to.equal(cookieHeader1);
+
+  });
 });
 
 
@@ -228,6 +245,10 @@ function getApp(options?: any) {
 
     if (ctx.path === '/first-request') {
       ctx.session.foo = 'bar';
+    }
+    if (ctx.path === '/first-request-error') {
+      ctx.session.foo = 'bar';
+      throw new Error('Hi');
     }
 
     if (ctx.path === '/second-request') {
