@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.8.1 (2022-10-11)
+------------------
+
+* Session data was not stored if a later middleware threw an uncaught
+  exception. This middleware now uses `finally` to ensure that session data
+  always gets stored, and the `Set-Cookie` header always gets sent.
+
+
 0.8.0 (2022-09-03)
 ------------------
 

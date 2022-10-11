@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Session storage using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
@@ -50,10 +50,10 @@
   "devDependencies": {
     "@curveball/bodyparser": "^0.5.0",
     "@curveball/kernel": "^0.20.0",
-    "@curveball/problem": "^0.3.0",
+    "@curveball/problem": "^0.4.0",
     "@types/chai": "^4.2.15",
     "@types/cookie": "^0.5.1",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^14.18.26",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
