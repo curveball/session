@@ -2,23 +2,16 @@
   "name": "@curveball/session",
   "version": "0.8.1",
   "description": "Session storage using HTTP cookies",
-  "main": "dist/index.js",
-  "scripts": {
-    "prepublishOnly": "make build",
-    "test": "make test",
-    "lint": "make lint",
-    "tsc": "tsc"
+  "type": "module",
+  "exports": {
+    "require": "./cjs/index.js",
+    "import": "./esm/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/curveball/session.git"
+  "main": "cjs/index.js",
+  "homepage": "https://github.com/curveball/session#readme",
+  "bugs": {
+    "url": "https://github.com/curveball/session/issues"
   },
-  "files": [
-    "package.json",
-    "README.md",
-    "dist",
-    "LICENSE"
-  ],
   "keywords": [
     "http",
     "framework",
@@ -30,6 +23,71 @@
     "cookie"
   ],
   "author": "Evert Pot (https://evertpot.com/)",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "make build",
+    "test": "make test",
+    "lint": "make lint",
+    "fix": "make fix",
+    "tsc": "tsc",
+    "start": "make start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curveball/session.git"
+  },
+  "dependencies": {
+    "cookie": "^0.5.0"
+  },
+  "peerDependencies": {
+    "@curveball/kernel": ">=0.21.0 <1"
+  },
+  "devDependencies": {
+    "@curveball/bodyparser": "^0.6.0",
+    "@curveball/kernel": "^0.21.0",
+    "@curveball/problem": "^0.5.0",
+    "@types/chai": "^4.2.15",
+    "@types/cookie": "^0.5.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^16.18.12",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "chai": "^4.3.0",
+    "eslint": "^8.23.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "sinon": "^15.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.2.2"
+  },
+  "engines": {
+    "node": ">= 16"
+  },
+  "files": [
+    "package.json",
+    "README.md",
+    "esm",
+    "cjs",
+    "LICENSE",
+    "src"
+  ],
+  "mocha": {
+    "loader": [
+      "ts-node/esm"
+    ],
+    "recursive": true,
+    "extension": [
+      "ts",
+      "js",
+      "tsx"
+    ],
+    "exit": true
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ]
+  },
   "contributors": [
     {
       "name": "Evert Pot",
@@ -41,50 +99,5 @@
       "email": "ju@badgateway.net",
       "url": "https://juhangsin.net"
     }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/curveball/session/issues"
-  },
-  "homepage": "https://github.com/curveball/session#readme",
-  "devDependencies": {
-    "@curveball/bodyparser": "^0.5.0",
-    "@curveball/kernel": "^0.20.0",
-    "@curveball/problem": "^0.4.0",
-    "@types/chai": "^4.2.15",
-    "@types/cookie": "^0.5.1",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^14.18.26",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
-    "chai": "^4.3.0",
-    "eslint": "^8.23.0",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
-    "sinon": "^14.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.2.2"
-  },
-  "types": "dist/",
-  "nyc": {
-    "extension": [
-      ".ts"
-    ]
-  },
-  "dependencies": {
-    "cookie": "^0.5.0"
-  },
-  "mocha": {
-    "require": "ts-node/register",
-    "recursive": true,
-    "extension": [
-      "ts",
-      "js",
-      "tsx"
-    ],
-    "exit": true
-  },
-  "peerDependencies": {
-    "@curveball/kernel": ">=0.20.0 <1"
-  }
+  ]
 }

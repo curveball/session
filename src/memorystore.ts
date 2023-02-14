@@ -1,6 +1,6 @@
 import { randomBytes as rb } from 'crypto';
 import { promisify } from 'util';
-import { SessionStore, SessionValues } from './types';
+import { SessionStore, SessionValues } from './types.js';
 
 type SessionData = [
   number,

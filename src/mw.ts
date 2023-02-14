@@ -1,9 +1,9 @@
 import { Context, Middleware } from '@curveball/kernel';
 import * as cookie from 'cookie';
-import MemoryStore from './memorystore';
-import { SessionOptions, SessionStore, SessionValues } from './types';
+import MemoryStore from './memorystore.js';
+import { SessionOptions, SessionStore, SessionValues } from './types.js';
 import { randomBytes } from 'crypto';
-import { CsrfError } from './errors';
+import { CsrfError } from './errors.js';
 
 /**
  * This function returns a middleware function.

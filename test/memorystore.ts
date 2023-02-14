@@ -1,4 +1,4 @@
-import MemoryStore from '../src/memorystore';
+import MemoryStore from '../src/memorystore.js';
 import { expect } from 'chai';
 
 describe('MemoryStore', () => {

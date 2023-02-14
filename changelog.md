@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.9.0 (????-??-??)
+------------------
+
+* This package now supports ESM and CommonJS modules.
+* No longer supports Node 14. Please use Node 16 or higher.
+
+
 0.8.1 (2022-10-11)
 ------------------
 
@@ -42,8 +49,8 @@ Changelog
 0.6.1 (2021-02-02)
 ------------------
 
-* Session data should be typed as `Record<string, any>` not
-  `Record<string, string>`.
+* Session data should be typed as `Record<string, any>` not `Record<string,
+  string>`.
 
 
 0.6.0 (2021-02-02)
