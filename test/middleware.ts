@@ -1,7 +1,7 @@
 import { Application, Response } from '@curveball/kernel';
-import session from '../src';
+import session from '../src/index.js';
 import { expect } from 'chai';
-import MemoryStore from '../src/memorystore';
+import MemoryStore from '../src/memorystore.js';
 
 describe('Session middleware', () => {
 

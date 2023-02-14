@@ -1,5 +1,5 @@
 import { Application, Response } from '@curveball/kernel';
-import session from '../src';
+import session from '../src/index.js';
 import { expect } from 'chai';
 import problem from '@curveball/problem';
 import bodyParser from '@curveball/bodyparser';
