@@ -33,16 +33,21 @@ export default function(options: SessionOptions): Middleware {
 
   return async (ctx, next) => {
 
+    let stored = false;
+
     let sessionId = getSessionId(ctx, cookieName);
     let sessionValues: SessionValues | null;
 
     ctx.session = {};
     ctx.sessionId = null;
-    ctx.getCsrf = async() => {
+    ctx.getCsrf = () => {
       if (ctx.session['csrf-token']) {
         return ctx.session['csrf-token'];
       }
-      const bytes = await randomBytes(32);
+      if (stored) {
+        console.error('[session] A new CSRF token was generated *after* the session was already serialized to the session store. This means that the CSRF token may not get stored and not recognized later. Storing the session happens during the cleanup phase of the session middleware. One way this can happen is if the session middleware is not loaded early enough');
+      }
+      const bytes = randomBytes(32);
       const token = bytes.toString('base64');
       ctx.session['csrf-token'] = token;
       return token;
@@ -106,6 +111,7 @@ export default function(options: SessionOptions): Middleware {
         }
 
         await store.set(sessionId!, ctx.session, Math.floor(Date.now() / 1000) + expiry);
+        stored = true;
 
         // Send new cookie
         ctx.response.headers.set('Set-Cookie',
