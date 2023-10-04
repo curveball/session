@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.10.0 (????-??-??)
+0.10.0 (2023-10-04)
 -------------------
 
 * The `getCsrf` function is no longer an async function, and returns the token
