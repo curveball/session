@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.10.0 (????-??-??)
+-------------------
+
+* The `getCsrf` function is no longer an async function, and returns the token
+  immediately.
+* A warning is now emitted if `getCsrf` is called after the session has already
+  been stored.
+
+
 0.9.0 (2023-02-14)
 ------------------
 
