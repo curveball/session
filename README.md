@@ -88,8 +88,8 @@ To delete an open session, just clear the session data:
 ```typescript
 app.use( ctx => {
 
-  // Running this will create the session
-  ctx.session = null;
+  // Running this will delete the session
+  ctx.session = {};
 
 });
 ```
