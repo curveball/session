@@ -77,7 +77,8 @@
       "ts",
       "js",
       "tsx"
-    ]
+    ],
+    "exit": true
   },
   "nyc": {
     "extension": [
