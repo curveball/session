@@ -23,6 +23,8 @@ export interface SessionStore {
 
   /**
    * Creates or updates a session.
+   *
+   * @param {string} expire UNIX timestamp of when the entry should expire (in seconds).
    */
   set(id: string, values: SessionValues, expire: number): Promise<void>;
 
